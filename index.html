@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>104旅步四營三連回報表格</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+<script async src="./app.js" ></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+  <section class="form__section" id="form">
+  <div class="container">
+    <h1 class="form-title">104旅步四營三連回報表格</h1>
+    <form action="" class="form" method="POST">
+      <input type="text" name="number" class="input-box" placeholder="編號" required>
+      <input type="text" name="name" class="input-box" placeholder="姓名" required>
+      <div class="input-group">
+        <div class="input-label">回報時間</div>
+        <input type="time" name="current-time" class="input-box">
+      </div>
+      <div class="input-group">
+        <div class="input-label">現在位置</div>
+        <div>
+          <input type="checkbox" id="at-home" value="在家" name="isHome">
+          <label for="at-home" required> 在家</label>
+        </div>
+        <input type="text" class="input-box input-box-toggle-true" placeholder="外出地點" name="locate" required>
+      </div>
+      <div class="input-group">
+        <div class="input-label">有無飲酒</div>
+        <div class="radio-group">
+          <div class="input-radio">
+            <input type="radio" id="alcohol-yes" name="alcohol" value="有" required>
+            <label for="alcohol-yes">有</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="alcohol-no" name="alcohol" value="無">
+            <label for="alcohol-no">無</label>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">活動</div>
+        <div class="radio-group">
+          <div class="input-radio">
+            <input type="radio" id="breakfast" name="activity" value="吃早餐" required>
+            <label for="breakfast">吃早餐</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="lunch" name="activity" value="吃午餐">
+            <label for="lunch">吃午餐</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="dinner" name="activity" value="吃晚餐">
+            <label for="dinner">吃晚餐</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="rest" name="activity" value="休息">
+            <label for="rest">休息</label>
+          </div>
+        </div>
+        <div class="input-radio">
+          <input type="radio" id="other-activity" name="activity" value="其他" class="input-text-toggle" data-text="activity-text">
+          <label for="other-activity">其他</label>
+        </div>
+        <input type="text" name="activity" class="input-box input-box-toggle-false" placeholder="活動" id="activity-text" required disabled>
+      </div>
+      <div class="input-group">
+        <div class="input-label">交通工具</div>
+        <div class="radio-group">
+          <div class="input-radio">
+            <input type="radio" id="walk" name="transportation" value="步行" required>
+            <label for="walk">步行</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="scooter" name="transportation" value="騎機車">
+            <label for="scooter">騎機車</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="car" name="transportation" value="開車">
+            <label for="car">開車</label>
+          </div>
+        </div>
+        <div class="radio-group">
+          <div class="input-radio">
+            <input type="radio" id="bus" name="transportation" value="搭公車">
+            <label for="bus">搭公車</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="MRT" name="transportation" value="搭捷運">
+            <label for="MRT">搭捷運</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="taxi" name="transportation" value="搭計程車">
+            <label for="taxi">搭計程車</label>
+          </div>
+          <div class="input-radio">
+            <input type="radio" id="highspeed" name="transportation" value="搭高鐵">
+            <label for="highspeed">搭高鐵</label>
+          </div>
+        </div>
+        <div class="input-radio">
+          <input type="radio" id="other" name="transportation" value="其他" class="input-text-toggle" data-text="transportation-text">
+          <label for="other">其他</label>
+        </div>
+        <input type="text" name="transportation" class="input-box input-box-toggle-false" placeholder="交通工具" id="transportation-text" required disabled>
+      </div>
+      <div class="input-group">
+        <div class="input-label">預計幾點到家</div>
+        <input type="time" name="return-time" class="input-box">
+      </div>
+      <input type="submit" class="form-button" value="送出">
+    </form>
+  </div>
+</section>
+<section class="result" id="result">
+  <div class="container">
+
+  </div>
+</section>
+</body>
+</html>
