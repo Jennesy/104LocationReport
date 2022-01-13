@@ -91,10 +91,26 @@ function getResults(target) {
   let activity = document.querySelector('input[name="activity"]:checked').value;
   activity = (activity === "其他") ? target[13].value : activity;
   result.push(activity);
-  let transportation = target[4].checked ? "（已在家）" : document.querySelector('input[name="transportation"]:checked').value;
+  let transportation = target[4].checked ? "步行" : document.querySelector('input[name="transportation"]:checked').value;
   transportation = (transportation === "其他") ? target[22].value : transportation
   result.push(transportation);
   const backTime = target[4].checked ? "（已在家）" : `${target[23].value.padStart(2, "0")}:${target[24].value.padStart(2, "0")}`;
   result.push(backTime);
   return result;
 }
+
+const form1Btn = document.getElementById("form1");
+const form2Btn = document.getElementById("form2");
+const formHandler = event => {
+  if (event.target.id === "form1") {
+    document.documentElement.setAttribute("data-theme", "form1");
+    form1Btn.style.height = "100%";
+    form2Btn.style.height = "80%";
+  } else {
+    document.documentElement.setAttribute("data-theme", "form2");
+    form2Btn.style.height = "100%";
+    form1Btn.style.height = "80%";
+  }
+};
+form1Btn.addEventListener("click", formHandler);
+form2Btn.addEventListener("click", formHandler);

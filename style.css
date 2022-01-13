@@ -1,8 +1,9 @@
 @import url(https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;900&display=swap);
 
-/*reset */
-html {
+html,
+body {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 *,
 *:before,
@@ -15,15 +16,56 @@ html {
   font-family: "Noto Serif TC", serif;
   font-weight: 300;
   font-size: 42px;
-  scroll-behavior: smooth;
 }
-/*reset end*/
 :root {
   --form-background: #eeeac7;
   --input-background: #ddd9b6;
   --button-color: #b6b28d;
   --text-color: #5e6144;
 }
+[data-theme="form2"] {
+  --form-background: #E3E8EC;
+  --input-background: #D2D7DD;
+  --button-color: #7E94A2;
+  --text-color: #34576B;
+}
+/*nav*/
+nav {
+  background: white;
+  height: 68px;
+  position: relative;
+}
+nav ul {
+  height: 46px;
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+}
+nav li {
+  list-style: none;
+  /*box-model*/
+  width: 200px;
+  padding: 5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /*text*/
+  text-align: center;
+  font-size: .7rem;
+  font-weight: 400;
+  overflow: hidden;
+}
+#form1 {
+  background: #eeeac7;
+  height: 100%;
+  margin-right: 5px;
+}
+#form2 {
+  background: #E3E8EC;
+  height: 80%;
+}
+/*form*/
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--button-color);
@@ -231,6 +273,12 @@ input[type="radio"]:checked::before {
   .container {
     width: 992px;
     margin: auto;
+  }
+  nav ul {
+    height: 38px;
+  }
+  nav li {
+    font-size: .85rem;
   }
   .input-group {
     margin: 24px 0;
