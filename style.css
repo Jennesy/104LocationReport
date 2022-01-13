@@ -15,6 +15,7 @@ html {
   font-family: "Noto Serif TC", serif;
   font-weight: 300;
   font-size: 42px;
+  scroll-behavior: smooth;
 }
 /*reset end*/
 :root {
@@ -193,6 +194,15 @@ input[type="radio"]:checked::before {
 .copy-button:focus {
   background: var(--button-color);
 }
+.reset-button{
+  font-family: sans-serif;
+  font-size: .7rem;
+  text-align: right;
+  color: #b57f7d;
+}
+.reset-button:hover {
+  color: var(--text-color);
+}
 .result-label {
   font-size: 1.1rem;
   font-weight: 900;
@@ -209,6 +219,9 @@ input[type="radio"]:checked::before {
   padding: 30px;
   font-weight: 300;
 }
+.invisible {
+  visibility: hidden;
+ }
 @media screen and (min-width: 992px) {
   *,
   *:before,
@@ -243,5 +256,8 @@ input[type="radio"]:checked::before {
   }
   input[type="checkbox"], input[type="radio"] {
     margin-right: 12px;
+  }
+  .reset-button {
+    font-size: .85rem;
   }
 }

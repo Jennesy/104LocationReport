@@ -21,6 +21,7 @@
           <input type="number" class="input-box input-box-inline" id="current-minute" name="current-minute"
        min="00" max="60" step="1" required>分
         </div>
+        <div class="reset-button" onclick="renewTime()">更新時間</div>
       </div>
       <div class="input-group">
         <div class="input-label">現在位置</div>
@@ -29,6 +30,7 @@
           <label for="at-home" required> 在家</label>
         </div>
         <input type="text" class="input-box input-box-toggle-true" placeholder="外出地點" name="locate" required>
+        <div class="reset-button">清空</div>
       </div>
       <div class="input-group">
         <div class="input-label">有無飲酒</div>
@@ -68,6 +70,7 @@
           <label for="other-activity">其他</label>
         </div>
         <input type="text" name="activity" class="input-box input-box-toggle-false" placeholder="活動" id="activity-text" required disabled>
+        <div class="reset-button invisible">清空</div>
       </div>
       <div class="input-group" id="transportation">
         <div class="input-label">交通工具</div>
@@ -108,6 +111,7 @@
           <label for="other">其他</label>
         </div>
         <input type="text" name="transportation" class="input-box input-box-toggle-false" placeholder="交通工具" id="transportation-text" required disabled>
+        <div class="reset-button invisible">清空</div>
       </div>
       <div class="input-group" id="return-time">
         <div class="input-label">預計幾點到家</div>
@@ -117,6 +121,7 @@
           <input type="number" class="input-box input-box-inline" id="return-minute" name="return-minute"
        min="00" max="60" step="1" value="00" required>分
         </div>
+        <div class="reset-button">清空</div>
       </div>
       <input type="submit" class="form-button" value="送出">
     </form>

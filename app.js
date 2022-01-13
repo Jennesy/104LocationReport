@@ -54,6 +54,21 @@ function copyToClipboard() {
   /* Alert the copied text */
   alert("複製到剪貼簿！");
 }
+function resetForm() {
+  formResult.innerHTML = "";
+}
+
+const resetBtns = document.querySelectorAll(".reset-button");
+resetBtns.forEach((btn, index) => {
+  btn.addEventListener("click", (event) => {
+    if (index === resetBtns.length - 1) {
+      document.querySelector("#return-hour").value = "";
+      document.querySelector("#return-minute").value = "";
+      return;
+    }
+    event.target.previousElementSibling.value = "";
+  })
+})
 
 const form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
