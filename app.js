@@ -45,3 +45,12 @@ inputTextToggle.forEach((checkbox) => {
     showInputBox(box, checkbox.checked);
   });
 })
+
+
+const formResult = document.querySelector(".form-result");
+function copyToClipboard() {
+  /* Copy the text inside the text field */
+  navigator.clipboard.writeText(formResult.innerHTML.replace(/<br>/g, "\n"));
+  /* Alert the copied text */
+  alert("複製到剪貼簿！");
+}

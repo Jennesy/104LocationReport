@@ -183,6 +183,32 @@ input[type="radio"]:checked::before {
 .form-button:focus {
   background: var(--text-color);
 }
+.copy-button{
+  color: var(--text-color);
+  background: var(--input-background);
+  border: 1px solid var(--form-background);
+  margin-bottom: 15px;
+}
+.copy-button:hover,
+.copy-button:focus {
+  background: var(--button-color);
+}
+.result-label {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  color: var(--form-background);
+}
+.form-result {
+  color: var(--form-background);
+  overflow-y: scroll;
+  height: 500px;
+  border: 1px solid var(--input-background);
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 30px;
+  font-weight: 300;
+}
 @media screen and (min-width: 992px) {
   *,
   *:before,
