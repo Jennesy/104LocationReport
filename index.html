@@ -15,7 +15,12 @@
       <input type="text" name="name" class="input-box" placeholder="姓名" required>
       <div class="input-group">
         <div class="input-label">回報時間</div>
-        <input type="time" name="current-time" class="input-box">
+        <div class="input-time">
+          <input type="number" class="input-box input-box-inline" id="current-hour" name="current-hour"
+       min="00" max="23" step="1" required>時
+          <input type="number" class="input-box input-box-inline" id="current-minute" name="current-minute"
+       min="00" max="60" step="1" required>分
+        </div>
       </div>
       <div class="input-group">
         <div class="input-label">現在位置</div>
@@ -64,7 +69,7 @@
         </div>
         <input type="text" name="activity" class="input-box input-box-toggle-false" placeholder="活動" id="activity-text" required disabled>
       </div>
-      <div class="input-group">
+      <div class="input-group" id="transportation">
         <div class="input-label">交通工具</div>
         <div class="radio-group">
           <div class="input-radio">
@@ -104,9 +109,14 @@
         </div>
         <input type="text" name="transportation" class="input-box input-box-toggle-false" placeholder="交通工具" id="transportation-text" required disabled>
       </div>
-      <div class="input-group">
+      <div class="input-group" id="return-time">
         <div class="input-label">預計幾點到家</div>
-        <input type="time" name="return-time" class="input-box">
+        <div class="input-time">
+          <input type="number" class="input-box input-box-inline" id="return-hour" name="return-hour"
+       min="00" max="23" step="1" value="22" required>時
+          <input type="number" class="input-box input-box-inline" id="return-minute" name="return-minute"
+       min="00" max="60" step="1" value="00" required>分
+        </div>
       </div>
       <input type="submit" class="form-button" value="送出">
     </form>
