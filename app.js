@@ -54,3 +54,32 @@ function copyToClipboard() {
   /* Alert the copied text */
   alert("複製到剪貼簿！");
 }
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const result = getResults(event.target);
+  formResult.innerText = `新兵${result[0]} ${result[1]}\n回報時間：${result[2]}\n有無飲酒：${result[3]}\n外出地點：${result[4]}\n活動：${result[5]}\n交通工具：${result[6]}\n預計幾點回家：${result[7]}`;
+  window.scrollTo(0, window.scrollY + window.innerHeight);
+})
+
+function getResults(target) {
+  const result = [];
+  result.push(target[0].value);
+  result.push(target[1].value);
+  const reportTime = `${target[2].value.padStart(2, "0")}:${target[3].value.padStart(2, "0")}`;
+  result.push(reportTime);
+  const alcohol = document.querySelector('input[name="alcohol"]:checked').value;
+  result.push(alcohol);
+  const location = target[4].checked ? "在家" : target[5].value;
+  result.push(location);
+  let activity = document.querySelector('input[name="activity"]:checked').value;
+  activity = (activity === "其他") ? target[13].value : activity;
+  result.push(activity);
+  let transportation = target[4].checked ? "（已在家）" : document.querySelector('input[name="transportation"]:checked').value;
+  transportation = (transportation === "其他") ? target[22].value : transportation
+  result.push(transportation);
+  const backTime = target[4].checked ? "（已在家）" : `${target[23].value.padStart(2, "0")}:${target[24].value.padStart(2, "0")}`;
+  result.push(backTime);
+  return result;
+}
