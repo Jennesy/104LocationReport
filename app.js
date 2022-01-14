@@ -61,9 +61,10 @@ function resetForm() {
 const resetBtns = document.querySelectorAll(".reset-button");
 resetBtns.forEach((btn, index) => {
   btn.addEventListener("click", (event) => {
-    if (index === resetBtns.length - 1) {
-      document.querySelector("#return-hour").value = "";
-      document.querySelector("#return-minute").value = "";
+    const data = event.target.dataset
+    if (data.type === "time") {
+      document.querySelector(`#${data.target}-hour`).value = "";
+      document.querySelector(`#${data.target}-minute`).value = "";
       return;
     }
     event.target.previousElementSibling.value = "";
@@ -74,7 +75,11 @@ const form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const result = getResults(event.target);
-  formResult.innerText = `新兵${result[0]} ${result[1]}\n回報時間：${result[2]}\n有無飲酒：${result[3]}\n外出地點：${result[4]}\n活動：${result[5]}\n交通工具：${result[6]}\n預計幾點回家：${result[7]}`;
+  if (result.length === 8) {
+    formResult.innerText = `新兵${result[0]} ${result[1]}\n回報時間：${result[2]}\n有無飲酒：${result[3]}\n外出地點：${result[4]}\n活動：${result[5]}\n交通工具：${result[6]}\n預計幾點回家：${result[7]}`;
+  } else {
+    formResult.innerText = `新兵${result[0]} ${result[1]}\n回報時間：${result[2]}\n有無飲酒：${result[3]}\n外出地點：${result[4]}\n活動：${result[5]}\n交通工具：${result[6]}\n預計幾點回家：${result[7]}\n本週收假時間：${result[8]}\n收假方式：${result[9]}\n預計幾點抵達成功嶺：${result[10]}`;
+  }
   window.scrollTo(0, window.scrollY + window.innerHeight);
 })
 
@@ -96,20 +101,34 @@ function getResults(target) {
   result.push(transportation);
   const backTime = target[4].checked ? "（已在家）" : `${target[23].value.padStart(2, "0")}:${target[24].value.padStart(2, "0")}`;
   result.push(backTime);
+  if (document.documentElement.dataset.theme === "form2") {
+    const endingTime = `${target[25].value.padStart(2, "0")}:${target[26].value.padStart(2, "0")}`;
+    result.push(endingTime);
+    let returnTransportation = document.querySelector('input[name="return-transportation"]:checked').value;
+    returnTransportation = (returnTransportation === "其他") ? target[35].value : returnTransportation
+    result.push(returnTransportation);
+    const arriveTime = `${target[36].value.padStart(2, "0")}:${target[37].value.padStart(2, "0")}`;
+    result.push(arriveTime);
+  }
   return result;
 }
 
 const form1Btn = document.getElementById("form1");
 const form2Btn = document.getElementById("form2");
+const form2Inputs = document.querySelectorAll(".form2-input");
 const formHandler = event => {
   if (event.target.id === "form1") {
     document.documentElement.setAttribute("data-theme", "form1");
     form1Btn.style.height = "100%";
     form2Btn.style.height = "80%";
+    form2Inputs.forEach(input => { input.disabled = true; })
+    document.getElementById("return-walk").required = false;
   } else {
     document.documentElement.setAttribute("data-theme", "form2");
     form2Btn.style.height = "100%";
     form1Btn.style.height = "80%";
+    form2Inputs.forEach(input => { input.disabled = false; })
+    document.getElementById("return-walk").required = true;
   }
 };
 form1Btn.addEventListener("click", formHandler);

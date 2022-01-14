@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.07rem;
   font-family: "Noto Serif TC", serif;
   font-weight: 300;
   font-size: 42px;
@@ -31,7 +31,7 @@ body {
 }
 /*nav*/
 nav {
-  background: white;
+  background: #040302;
   height: 68px;
   position: relative;
 }
@@ -103,14 +103,15 @@ nav li {
 .input-box {
   width: 100%;
   height: 2rem;
-  margin: 15px 0;
   padding: 0 30px;
+  margin-top: 15px;
   border: none;
   border-radius: 10px;
   background: var(--input-background);
 }
 .input-box-inline {
   width: 40%;
+  margin: 0;
 }
 .input-box:focus {
   box-sizing: border-box;
@@ -118,16 +119,21 @@ nav li {
   border: 2px solid var(--button-color);
   border-radius: 10px;
 }
-.input-box-toggle-true,
-.input-box-toggle-false {
-  transition: all 0.2s ease-out;
+input[name="id"] .input-box {
+  margin: 0;
+}
+.input-toggle-group-true,
+.input-toggle-group-false {
+  max-height: 800px;
+  overflow-y: hidden;
+  transition: all 0.5s ease-out;
   transform-origin: top;
 }
-.input-box-toggle-false {
-  transform: scale(1, 0);
+.input-toggle-group-false {
+  max-height: 0;
 }
 .input-group {
-  margin: 40px 0;
+  padding: 40px 0;
 }
 .input-label {
   font-size: 1.1rem;
@@ -241,6 +247,8 @@ input[type="radio"]:checked::before {
   font-size: .7rem;
   text-align: right;
   color: #b57f7d;
+  height: 1.5rem;
+  line-height: 1.5rem;
 }
 .reset-button:hover {
   color: var(--text-color);
@@ -264,6 +272,11 @@ input[type="radio"]:checked::before {
 .invisible {
   visibility: hidden;
  }
+html[data-theme="form1"] #ending-time,
+html[data-theme="form1"] #return-transportation,
+html[data-theme="form1"] #arrive-time {
+  display: none;
+}
 @media screen and (min-width: 992px) {
   *,
   *:before,
@@ -283,13 +296,17 @@ input[type="radio"]:checked::before {
   .input-group {
     margin: 24px 0;
   }
-  .input-label {
+  .input-label,
+  .result-label {
     margin-bottom: 5px;
   }
   .input-box {
-    margin: 10px 0;
+    margin-top: 10px;
     padding: 0px 18px;
     border: none;
+  }
+  input[name="id"] .input-box {
+    margin: 0;
   }
   .input-box-inline {
     width: 45%;
@@ -307,5 +324,7 @@ input[type="radio"]:checked::before {
   }
   .reset-button {
     font-size: .85rem;
+    height: 2rem;
+    line-height: 2rem;
   }
 }
