@@ -1,65 +1,39 @@
 renewTime()
-function renewTime() {
-  const currentTime = new Date();
-  document.querySelector("#current-hour").value = currentTime.getHours();
-  document.querySelector("#current-minute").value = currentTime.getMinutes();
-}
-
-const showInputBox = (box, show) => {
-  if (show) {
-    box.parentNode.style.maxHeight = "800px";
-    box.disabled = false;
-    box.focus();
-  } else {
-    box.parentNode.style.maxHeight = "0";
-    box.disabled = true;
-  }
-}
-const showReturnTime = (show) => {
-  const returnTime = document.querySelector("#return-time");
-  const transportation = document.querySelector("#transportation");
-  if (show) {
-    returnTime.style.display = "grid";
-    transportation.style.display = "grid";
-    document.querySelector("#walk").required = true;
-  } else {
-    returnTime.style.display = "none";
-    transportation.style.display = "none";
-    document.querySelector("#walk").required = false;
-  }
-}
 
 const atHome = document.querySelector("#at-home");
 const locate = document.querySelector('input[name="locate"]');
+
+const form1Btn = document.getElementById("form1");
+const form2Btn = document.getElementById("form2");
+const form2Inputs = document.querySelectorAll(".form2-input");
+const otherToggle = document.querySelectorAll(".other-toggle");
+const formResult = document.querySelector(".form-result");
+const resetBtns = document.querySelectorAll(".reset-button");
+const form = document.querySelector("form");
+
+/* form handle */
+form1Btn.addEventListener("click", formHandler);
+form2Btn.addEventListener("click", formHandler);
+
+/* if at home */
+/* remove "locate", "return time", "transportation" */
 atHome.addEventListener("change", () => {
   showInputBox(locate, !atHome.checked);
-  showReturnTime(!atHome.checked);
+  showTimeAndTransport(!atHome.checked);
 });
 
-const inputTextToggle = document.querySelectorAll(".input-text-toggle");
-inputTextToggle.forEach((checkbox) => {
+/* check radio "other" toggle text-input */
+otherToggle.forEach((checkbox) => {
   checkbox.parentElement.parentElement.addEventListener("click", () => {
     const box = document.querySelector(`#${checkbox.dataset.text}`);
     showInputBox(box, checkbox.checked);
   });
 })
 
-
-const formResult = document.querySelector(".form-result");
-function copyToClipboard() {
-  /* Copy the text inside the text field */
-  navigator.clipboard.writeText(formResult.innerHTML.replace(/<br>/g, "\n"));
-  /* Alert the copied text */
-  alert("複製到剪貼簿！");
-}
-function resetForm() {
-  formResult.innerHTML = "";
-}
-
-const resetBtns = document.querySelectorAll(".reset-button");
-resetBtns.forEach((btn, index) => {
+/* clear text-input boxes */
+resetBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
-    const data = event.target.dataset
+    const data = event.target.dataset;
     if (data.type === "time") {
       document.querySelector(`#${data.target}-hour`).value = "";
       document.querySelector(`#${data.target}-minute`).value = "";
@@ -69,7 +43,7 @@ resetBtns.forEach((btn, index) => {
   })
 })
 
-const form = document.querySelector("form");
+/* form submit */
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const result = getResults(event.target);
@@ -80,6 +54,75 @@ form.addEventListener("submit", (event) => {
   }
   window.scrollTo(0, window.scrollY + window.innerHeight);
 })
+
+/* FUNCTIONS */
+function renewTime() {
+  const currentTime = new Date();
+  document.querySelector("#current-hour").value = currentTime.getHours();
+  document.querySelector("#current-minute").value = currentTime.getMinutes();
+}
+
+function showInputBox(box, show) {
+  if (show) {
+    box.parentNode.style.maxHeight = "800px";
+    box.disabled = false;
+    box.focus();
+  } else {
+    box.parentNode.style.maxHeight = "0";
+    box.disabled = true;
+  }
+}
+
+function showTimeAndTransport(show) {
+  if (show) {
+    document.querySelector("#return-time").style.display = "grid";
+    document.querySelector("#transportation").style.display = "grid";
+    document.querySelector("#walk").required = true;
+    document.querySelector("#return-hour").required = true;
+    document.querySelector("#return-minute").required = true;
+  } else {
+    document.querySelector("#return-time").style.display = "none";
+    document.querySelector("#transportation").style.display = "none";
+    document.querySelector("#walk").required = false;
+    document.querySelector("#return-hour").required = false;
+    document.querySelector("#return-minute").required = false;
+  }
+}
+
+function formHandler(event) {
+  /* FORM 1 */
+  if (event.target.id === "form1") {
+    /* change visual */
+    document.documentElement.setAttribute("data-theme", "form1");
+    form1Btn.style.height = "100%";
+    form2Btn.style.height = "80%";
+
+    /* change input */
+    form2Inputs.forEach(input => { input.disabled = true; })
+    document.getElementById("return-walk").required = false;
+    document.getElementById("return-hour").value = 22;
+    document.getElementById("return-minute").value = 00;
+    return;
+  }
+  /* FORM 2 */
+  /* change visual */
+  document.documentElement.setAttribute("data-theme", "form2");
+  form2Btn.style.height = "100%";
+  form1Btn.style.height = "80%";
+
+  /* change input */
+  form2Inputs.forEach(input => { input.disabled = false; })
+  document.getElementById("return-walk").required = true;
+  document.getElementById("return-hour").value = "";
+  document.getElementById("return-minute").value = "";
+};
+
+function copyToClipboard() {
+  /* Copy the text inside the text field */
+  navigator.clipboard.writeText(formResult.innerHTML.replace(/<br>/g, "\n"));
+  /* Alert the copied text */
+  alert("複製到剪貼簿！");
+}
 
 function getResults(target) {
   const result = [];
@@ -110,24 +153,3 @@ function getResults(target) {
   }
   return result;
 }
-
-const form1Btn = document.getElementById("form1");
-const form2Btn = document.getElementById("form2");
-const form2Inputs = document.querySelectorAll(".form2-input");
-const formHandler = event => {
-  if (event.target.id === "form1") {
-    document.documentElement.setAttribute("data-theme", "form1");
-    form1Btn.style.height = "100%";
-    form2Btn.style.height = "80%";
-    form2Inputs.forEach(input => { input.disabled = true; })
-    document.getElementById("return-walk").required = false;
-  } else {
-    document.documentElement.setAttribute("data-theme", "form2");
-    form2Btn.style.height = "100%";
-    form1Btn.style.height = "80%";
-    form2Inputs.forEach(input => { input.disabled = false; })
-    document.getElementById("return-walk").required = true;
-  }
-};
-form1Btn.addEventListener("click", formHandler);
-form2Btn.addEventListener("click", formHandler);
