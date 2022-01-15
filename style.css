@@ -8,10 +8,10 @@ body {
 *,
 *:before,
 *:after {
+  color: var(--text-color);
   box-sizing: inherit;
   margin: 0;
   padding: 0;
-  color: var(--text-color);
   letter-spacing: 0.07rem;
   font-family: "Noto Serif TC", serif;
   font-weight: 300;
@@ -134,10 +134,14 @@ input[name="id"] .input-box {
 }
 .input-group {
   padding: 40px 0;
+  border-bottom: 1px solid grey;
+  display: grid;
+  grid-template-columns: 190px auto;
+  grid-gap: 38px;
 }
 .input-label {
-  font-size: 1.1rem;
-  font-weight: 900;
+  font-size: 0.8rem;
+  font-weight: 600;
   margin-bottom: 15px;
 }
 .radio-group {
@@ -155,7 +159,7 @@ input[name="id"] .input-box {
   display: inline-flex;
   align-items: center;
   margin-right: 20px;
-  width: 350px;
+  width: 260px;
 }
 input[type="radio"],
 input[type="radio"] ~ label {
@@ -215,13 +219,13 @@ input[type="radio"]:checked::before {
   left: 50%;
 }
 .form-button,
-.copy-button,
-.reset-button {
+.copy-button {
   -webkit-appearance: none; 
   border-radius: 10px;
   width: 100%;
   height: 1.8rem;
   font-weight: 400;
+  cursor: pointer;
 }
 .form-button{
   color: var(--form-background);
@@ -249,13 +253,14 @@ input[type="radio"]:checked::before {
   color: #b57f7d;
   height: 1.5rem;
   line-height: 1.5rem;
+  cursor: pointer;
 }
 .reset-button:hover {
   color: var(--text-color);
 }
 .result-label {
-  font-size: 1.1rem;
-  font-weight: 900;
+  font-size: 0.8rem;
+  font-weight: 600;
   margin-bottom: 15px;
   color: var(--form-background);
 }
@@ -269,9 +274,6 @@ input[type="radio"]:checked::before {
   padding: 30px;
   font-weight: 300;
 }
-.invisible {
-  visibility: hidden;
- }
 html[data-theme="form1"] #ending-time,
 html[data-theme="form1"] #return-transportation,
 html[data-theme="form1"] #arrive-time {
@@ -309,7 +311,7 @@ html[data-theme="form1"] #arrive-time {
     margin: 0;
   }
   .input-box-inline {
-    width: 45%;
+    width: 40%;
   }
   .input-box,
   .input-box:focus,

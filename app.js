@@ -7,22 +7,20 @@ function renewTime() {
 
 const showInputBox = (box, show) => {
   if (show) {
-    box.style.transform = "scale(1, 1)"
+    box.parentNode.style.maxHeight = "800px";
     box.disabled = false;
     box.focus();
-    box.nextElementSibling.style.visibility = "visible";
   } else {
-    box.style.transform = "scale(1, 0)";
+    box.parentNode.style.maxHeight = "0";
     box.disabled = true;
-    box.nextElementSibling.style.visibility = "hidden";
   }
 }
 const showReturnTime = (show) => {
   const returnTime = document.querySelector("#return-time");
   const transportation = document.querySelector("#transportation");
   if (show) {
-    returnTime.style.display = "block";
-    transportation.style.display = "block";
+    returnTime.style.display = "grid";
+    transportation.style.display = "grid";
     document.querySelector("#walk").required = true;
   } else {
     returnTime.style.display = "none";
@@ -32,7 +30,7 @@ const showReturnTime = (show) => {
 }
 
 const atHome = document.querySelector("#at-home");
-const locate = atHome.parentNode.nextElementSibling;
+const locate = document.querySelector('input[name="locate"]');
 atHome.addEventListener("change", () => {
   showInputBox(locate, !atHome.checked);
   showReturnTime(!atHome.checked);
