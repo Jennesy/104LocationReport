@@ -1,8 +1,9 @@
 renewTime()
 
+const name = document.querySelector('input[name="name"]');
+const number = document.querySelector('input[name="number"]');
 const atHome = document.querySelector("#at-home");
 const locate = document.querySelector('input[name="locate"]');
-
 const form1Btn = document.getElementById("form1");
 const form2Btn = document.getElementById("form2");
 const form2Inputs = document.querySelectorAll(".form2-input");
@@ -10,6 +11,11 @@ const otherToggle = document.querySelectorAll(".other-toggle");
 const formResult = document.querySelector(".form-result");
 const resetBtns = document.querySelectorAll(".reset-button");
 const form = document.querySelector("form");
+
+/* query string handle */
+const url = new URL(window.location);
+name.setAttribute("value", url.searchParams.get('name') || "");
+number.setAttribute("value", url.searchParams.get('number') || "");
 
 /* form handle */
 form1Btn.addEventListener("click", formHandler);
