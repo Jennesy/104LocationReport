@@ -43,8 +43,10 @@ nav ul {
   display: flex;
   align-items: flex-end;
 }
-nav li {
+#form1, 
+#form2 {
   list-style: none;
+  cursor: pointer;
   /*box-model*/
   width: 200px;
   padding: 5px;
