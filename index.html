@@ -1,233 +1,499 @@
 <!DOCTYPE html>
 <html data-theme="form1">
-<head>
-<title>104旅步四營三連回報表格</title>
-<link rel="stylesheet" type="text/css" href="./style.css">
-<script async src="./app.js" ></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>
-<body>
-  <nav>
-    <ul>
-      <li id="form1">早晚回報</li>
-      <li id="form2">收假回報</li>
-    </ul>
-  </nav>
-  <section class="form__section" id="form">
-  <div class="container">
-    <h1 class="form-title">104旅步四營三連回報表格</h1>
-    <form action="" class="form" method="POST">
-      <div class="input-group">
-        <div class="input-label">新兵資料</div>
-        <div>
-          <input type="text" name="number" class="input-box" placeholder="編號 (例：07-123)" required>
-          <input type="text" name="name" class="input-box" placeholder="姓名 (例：王小明)" required>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-label">回報時間</div>
-        <div>
-          <div class="input-time">
-            <input type="number" class="input-box input-box-inline" id="current-hour" name="current-hour"
-        min="00" max="23" step="1" required>時
-            <input type="number" class="input-box input-box-inline" id="current-minute" name="current-minute"
-        min="00" max="60" step="1" required>分
-          </div>
-          <div class="reset-button" onclick="renewTime()">更新時間</div>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-label">現在位置</div>
-        <div>
-          <input type="checkbox" id="at-home" value="在家" name="isHome">
-          <label for="at-home" required> 在家</label>
-          <div class="input-toggle-group-true">
-            <input type="text" class="input-box" placeholder="外出地點" name="locate" required>
-            <div class="reset-button">清空</div>
-          </div>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-label">有無飲酒</div>
-        <div class="radio-group">
-          <div class="input-radio">
-            <input type="radio" id="alcohol-yes" name="alcohol" value="有" required>
-            <label for="alcohol-yes">有</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="alcohol-no" name="alcohol" value="無">
-            <label for="alcohol-no">無</label>
-          </div>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-label">活動</div>
-        <div>
-          <div class="radio-group">
-            <div class="input-radio">
-              <input type="radio" id="breakfast" name="activity" value="吃早餐" required>
-              <label for="breakfast">吃早餐</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="lunch" name="activity" value="吃午餐">
-              <label for="lunch">吃午餐</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="dinner" name="activity" value="吃晚餐">
-              <label for="dinner">吃晚餐</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="rest" name="activity" value="休息">
-              <label for="rest">休息</label>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="other-activity" name="activity" value="其他" class="other-toggle" data-text="activity-text">
-            <label for="other-activity">其他</label>
-          </div>
-          <div class="input-toggle-group-false">
-            <input type="text" name="activity" class="input-box" placeholder="活動" id="activity-text" required disabled>
-            <div class="reset-button">清空</div>
-          </div>
-        </div>
-      </div>
-      <div class="input-group" id="transportation">
-        <div class="input-label">交通工具</div>
-        <div>
-          <div class="radio-group">
-            <div class="input-radio">
-              <input type="radio" id="walk" name="transportation" value="步行" required>
-              <label for="walk">步行</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="scooter" name="transportation" value="騎機車">
-              <label for="scooter">騎機車</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="car" name="transportation" value="開車">
-              <label for="car">開車</label>
-            </div>
-          </div>
-          <div class="radio-group">
-            <div class="input-radio">
-              <input type="radio" id="bus" name="transportation" value="搭公車">
-              <label for="bus">搭公車</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="MRT" name="transportation" value="搭捷運">
-              <label for="MRT">搭捷運</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="taxi" name="transportation" value="搭計程車">
-              <label for="taxi">搭計程車</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="highspeed" name="transportation" value="搭高鐵">
-              <label for="highspeed">搭高鐵</label>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="other" name="transportation" value="其他" class="other-toggle" data-text="transportation-text">
-            <label for="other">其他</label>
-          </div>
-          <div class="input-toggle-group-false">
-            <input type="text" name="transportation" class="input-box" placeholder="交通工具" id="transportation-text" required disabled>
-            <div class="reset-button">清空</div>
-          </div>
-        </div>
-      </div>
-      <div class="input-group" id="return-time">
-        <div class="input-label">預計<br>幾點到家</div>
-        <div>
-          <div class="input-time">
-            <input type="number" class="input-box input-box-inline" id="return-hour" name="return-hour"
-        min="00" max="23" step="1" value="22" data-type="time" required>時
-            <input type="number" class="input-box input-box-inline" id="return-minute" name="return-minute"
-        min="00" max="60" step="1" value="00" data-type="time" required>分
-          </div>
-          <div class="reset-button" data-type="time" data-target="return">清空</div>
-        </div>
-      </div>
-      <div class="input-group" id="ending-time">
-        <div class="input-label">本週<br>收假時間</div>
-        <div>
-          <div class="input-time">
-            <input type="number" class="input-box input-box-inline form2-input" id="ending-hour" name="ending-hour"
-        min="00" max="23" step="1" value="19" data-type="time" required disabled>時
-            <input type="number" class="input-box input-box-inline form2-input" id="ending-minute" name="ending-minute"
-        min="00" max="60" step="1" value="30" data-type="time" required disabled>分
-          </div>
-          <div class="reset-button" data-type="time" data-target="ending">清空</div>
-        </div>
-      </div>
-      <div class="input-group" id="return-transportation">
-        <div class="input-label">收假方式</div>
-        <div>
-          <div class="radio-group">
-            <div class="input-radio">
-              <input type="radio" id="return-walk" name="return-transportation" value="步行">
-              <label for="return-walk">步行</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="return-scooter" name="return-transportation" value="騎機車">
-              <label for="return-scooter">騎機車</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="return-car" name="return-transportation" value="開車">
-              <label for="return-car">開車</label>
-            </div>
-          </div>
-          <div class="radio-group">
-            <div class="input-radio">
-              <input type="radio" id="return-bus" name="return-transportation" value="搭公車">
-              <label for="return-bus">搭公車</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="return-MRT" name="return-transportation" value="搭捷運">
-              <label for="return-MRT">搭捷運</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="return-taxi" name="return-transportation" value="搭計程車">
-              <label for="return-taxi">搭計程車</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="return-highspeed" name="return-transportation" value="搭高鐵">
-              <label for="return-highspeed">搭高鐵</label>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="return-other" name="return-transportation" value="其他" class="other-toggle" data-text="return-transportation-text">
-            <label for="return-other">其他</label>
-          </div>
-          <div class="input-toggle-group-false">
-            <input type="text" name="return-transportation" class="input-box" placeholder="收假方式" id="return-transportation-text" required disabled>
-            <div class="reset-button">清空</div>
-          </div>
-        </div>
-      </div>
-      <div class="input-group" id="arrive-time">
-        <div class="input-label">預計幾點<br>抵達成功嶺</div>
-        <div>
-          <div class="input-time">
-            <input type="number" class="input-box input-box-inline form2-input" id="arrive-hour" name="arrive-hour"
-        min="00" max="23" step="1" value="18" data-type="time" required disabled>時
-            <input type="number" class="input-box input-box-inline form2-input" id="arrive-minute" name="arrive-minute"
-        min="00" max="60" step="1" value="30" data-type="time" required disabled>分
-          </div>
-          <div class="reset-button" data-type="time" data-target="arrive">清空</div>
-        </div>
-      </div>
-      <input type="submit" class="form-button" value="產生內容">
-    </form>
-  </div>
-</section>
-<section class="result__section" id="result">
-  <div class="container">
-    <div class="result-label">回報內容</div>
-    <div class="form-result"></div>
-    <button class="copy-button" onclick="copyToClipboard()">複製
-    </button>
-  </div>
-</section>
-</body>
+	<head>
+		<title>104旅步四營三連回報表格</title>
+		<link rel="stylesheet" type="text/css" href="./style.css" />
+		<script async src="./app.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+		/>
+	</head>
+	<body>
+		<nav>
+			<ul>
+				<li id="form1">早晚回報</li>
+				<li id="form2">收假回報</li>
+			</ul>
+		</nav>
+		<section class="form__section" id="form">
+			<div class="container">
+				<h1 class="form-title">104旅步四營三連回報表格</h1>
+				<form action="" class="form" method="POST">
+					<div class="input-group">
+						<div class="input-label">新兵資料</div>
+						<div>
+							<input
+								type="text"
+								name="number"
+								class="input-box"
+								no-margin
+								placeholder="編號 (例：07-123)"
+								required
+							/>
+							<input
+								type="text"
+								name="name"
+								class="input-box"
+								placeholder="姓名 (例：王小明)"
+								required
+							/>
+						</div>
+					</div>
+					<div class="input-group">
+						<div class="input-label">回報時間</div>
+						<div>
+							<div class="input-time">
+								<input
+									type="number"
+									class="input-box input-box-inline"
+									id="current-hour"
+									name="current-hour"
+									min="00"
+									max="23"
+									step="1"
+									required
+								/>時
+								<input
+									type="number"
+									class="input-box input-box-inline"
+									id="current-minute"
+									name="current-minute"
+									min="00"
+									max="60"
+									step="1"
+									required
+								/>分
+							</div>
+							<div class="reset-button" onclick="renewTime()">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink"
+									version="1.1"
+									x="0px"
+									y="0px"
+									viewBox="0 0 1000 1000"
+									enable-background="new 0 0 1000 1000"
+									xml:space="preserve"
+								>
+									<metadata>
+										Svg Vector Icons : http://www.onlinewebfonts.com/icon
+									</metadata>
+									<g>
+										<path
+											d="M851.1,549.9v0.5c0,198.4-156.8,359.9-351.5,359.9c-194.7,0-351.6-161.4-351.6-359.9c0-197.2,155.1-357.7,350.8-359.7v65.7c0,37.8,33.1,38.7,51.5,21.9l135.1-102.6c0,0,14.7-12.5,14.7-26.3c0-14.5-15-26.3-15-26.3L550.4,20.4C532,3.6,498.9,4.6,498.9,42.3v68.5C264,112.8,70.6,309.2,70.6,550.3C70.6,792.8,262.2,990,500,990c237.8,0,429.4-197.2,429.4-439.6v-0.5c0,0,0-44.9-39.6-44.9C852.6,505,851.1,549.9,851.1,549.9L851.1,549.9z"
+										/>
+									</g></svg
+								>更新時間
+							</div>
+						</div>
+					</div>
+					<div class="input-group">
+						<div class="input-label">現在位置</div>
+						<div>
+							<input type="checkbox" id="at-home" value="在家" name="isHome" />
+							<label for="at-home" required> 在家</label>
+							<div class="input-toggle-group-true">
+								<input
+									type="text"
+									class="input-box"
+									placeholder="外出地點"
+									name="locate"
+									required
+								/>
+								<div class="reset-button">清空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-group">
+						<div class="input-label">有無飲酒</div>
+						<div class="radio-group">
+							<div class="input-radio">
+								<input
+									type="radio"
+									id="alcohol-yes"
+									name="alcohol"
+									value="有"
+									required
+								/>
+								<label for="alcohol-yes">有</label>
+							</div>
+							<div class="input-radio">
+								<input type="radio" id="alcohol-no" name="alcohol" value="無" />
+								<label for="alcohol-no">無</label>
+							</div>
+						</div>
+					</div>
+					<div class="input-group">
+						<div class="input-label">活動</div>
+						<div>
+							<div class="radio-group">
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="breakfast"
+										name="activity"
+										value="吃早餐"
+										required
+									/>
+									<label for="breakfast">吃早餐</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="lunch"
+										name="activity"
+										value="吃午餐"
+									/>
+									<label for="lunch">吃午餐</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="dinner"
+										name="activity"
+										value="吃晚餐"
+									/>
+									<label for="dinner">吃晚餐</label>
+								</div>
+								<div class="input-radio">
+									<input type="radio" id="rest" name="activity" value="休息" />
+									<label for="rest">休息</label>
+								</div>
+							</div>
+							<div class="input-radio">
+								<input
+									type="radio"
+									id="other-activity"
+									name="activity"
+									value="其他"
+									class="other-toggle"
+									data-text="activity-text"
+								/>
+								<label for="other-activity">其他</label>
+							</div>
+							<div class="input-toggle-group-false">
+								<input
+									type="text"
+									name="activity"
+									class="input-box"
+									placeholder="活動"
+									id="activity-text"
+									required
+									disabled
+								/>
+								<div class="reset-button">清空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-group" id="transportation">
+						<div class="input-label">交通工具</div>
+						<div>
+							<div class="radio-group">
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="walk"
+										name="transportation"
+										value="步行"
+										required
+									/>
+									<label for="walk">步行</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="scooter"
+										name="transportation"
+										value="騎機車"
+									/>
+									<label for="scooter">騎機車</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="car"
+										name="transportation"
+										value="開車"
+									/>
+									<label for="car">開車</label>
+								</div>
+							</div>
+							<div class="radio-group">
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="bus"
+										name="transportation"
+										value="搭公車"
+									/>
+									<label for="bus">搭公車</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="MRT"
+										name="transportation"
+										value="搭捷運"
+									/>
+									<label for="MRT">搭捷運</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="taxi"
+										name="transportation"
+										value="搭計程車"
+									/>
+									<label for="taxi">搭計程車</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="highspeed"
+										name="transportation"
+										value="搭高鐵"
+									/>
+									<label for="highspeed">搭高鐵</label>
+								</div>
+							</div>
+							<div class="input-radio">
+								<input
+									type="radio"
+									id="other"
+									name="transportation"
+									value="其他"
+									class="other-toggle"
+									data-text="transportation-text"
+								/>
+								<label for="other">其他</label>
+							</div>
+							<div class="input-toggle-group-false">
+								<input
+									type="text"
+									name="transportation"
+									class="input-box"
+									placeholder="交通工具"
+									id="transportation-text"
+									required
+									disabled
+								/>
+								<div class="reset-button">清空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-group" id="return-time">
+						<div class="input-label">預計<br />幾點到家</div>
+						<div>
+							<div class="input-time">
+								<input
+									type="number"
+									class="input-box input-box-inline"
+									id="return-hour"
+									name="return-hour"
+									min="00"
+									max="23"
+									step="1"
+									value="22"
+									data-type="time"
+									required
+								/>時
+								<input
+									type="number"
+									class="input-box input-box-inline"
+									id="return-minute"
+									name="return-minute"
+									min="00"
+									max="60"
+									step="1"
+									value="00"
+									data-type="time"
+									required
+								/>分
+							</div>
+							<div class="reset-button" data-type="time" data-target="return">
+								清空
+							</div>
+						</div>
+					</div>
+					<div class="input-group" id="ending-time">
+						<div class="input-label">本週<br />收假時間</div>
+						<div>
+							<div class="input-time">
+								<input
+									type="number"
+									class="input-box input-box-inline form2-input"
+									id="ending-hour"
+									name="ending-hour"
+									min="00"
+									max="23"
+									step="1"
+									value="19"
+									data-type="time"
+									required
+									disabled
+								/>時
+								<input
+									type="number"
+									class="input-box input-box-inline form2-input"
+									id="ending-minute"
+									name="ending-minute"
+									min="00"
+									max="60"
+									step="1"
+									value="30"
+									data-type="time"
+									required
+									disabled
+								/>分
+							</div>
+							<div class="reset-button" data-type="time" data-target="ending">
+								清空
+							</div>
+						</div>
+					</div>
+					<div class="input-group" id="return-transportation">
+						<div class="input-label">收假方式</div>
+						<div>
+							<div class="radio-group">
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-walk"
+										name="return-transportation"
+										value="步行"
+									/>
+									<label for="return-walk">步行</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-scooter"
+										name="return-transportation"
+										value="騎機車"
+									/>
+									<label for="return-scooter">騎機車</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-car"
+										name="return-transportation"
+										value="開車"
+									/>
+									<label for="return-car">開車</label>
+								</div>
+							</div>
+							<div class="radio-group">
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-bus"
+										name="return-transportation"
+										value="搭公車"
+									/>
+									<label for="return-bus">搭公車</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-MRT"
+										name="return-transportation"
+										value="搭捷運"
+									/>
+									<label for="return-MRT">搭捷運</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-taxi"
+										name="return-transportation"
+										value="搭計程車"
+									/>
+									<label for="return-taxi">搭計程車</label>
+								</div>
+								<div class="input-radio">
+									<input
+										type="radio"
+										id="return-highspeed"
+										name="return-transportation"
+										value="搭高鐵"
+									/>
+									<label for="return-highspeed">搭高鐵</label>
+								</div>
+							</div>
+							<div class="input-radio">
+								<input
+									type="radio"
+									id="return-other"
+									name="return-transportation"
+									value="其他"
+									class="other-toggle"
+									data-text="return-transportation-text"
+								/>
+								<label for="return-other">其他</label>
+							</div>
+							<div class="input-toggle-group-false">
+								<input
+									type="text"
+									name="return-transportation"
+									class="input-box"
+									placeholder="收假方式"
+									id="return-transportation-text"
+									required
+									disabled
+								/>
+								<div class="reset-button">清空</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-group" id="arrive-time">
+						<div class="input-label">預計幾點<br />抵達成功嶺</div>
+						<div>
+							<div class="input-time">
+								<input
+									type="number"
+									class="input-box input-box-inline form2-input"
+									id="arrive-hour"
+									name="arrive-hour"
+									min="00"
+									max="23"
+									step="1"
+									value="18"
+									data-type="time"
+									required
+									disabled
+								/>時
+								<input
+									type="number"
+									class="input-box input-box-inline form2-input"
+									id="arrive-minute"
+									name="arrive-minute"
+									min="00"
+									max="60"
+									step="1"
+									value="30"
+									data-type="time"
+									required
+									disabled
+								/>分
+							</div>
+							<div class="reset-button" data-type="time" data-target="arrive">
+								清空
+							</div>
+						</div>
+					</div>
+					<input type="submit" class="form-button" value="產生內容" />
+				</form>
+			</div>
+		</section>
+		<section class="result__section" id="result">
+			<div class="container">
+				<div class="result-label">回報內容</div>
+				<div class="form-result"></div>
+				<button class="copy-button" onclick="copyToClipboard()">複製</button>
+			</div>
+		</section>
+	</body>
 </html>
